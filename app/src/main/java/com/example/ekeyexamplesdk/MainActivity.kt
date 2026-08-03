@@ -97,7 +97,6 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 .background(
                     Brush.horizontalGradient(
                         listOf(Color(0xFF007AFF), Color(0xFF5856D6))
-                        ß
                     )
                 )
         ) {
