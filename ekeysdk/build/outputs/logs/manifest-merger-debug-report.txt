@@ -1,0 +1,30 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:2:1-13:12
+INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:2:1-13:12
+	package
+		INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:4:5-67
+	android:name
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:4:22-64
+application
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:6:5-11:19
+activity#com.example.ekeysdk.EkeyLoginActivity
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:7:9-10:63
+	android:exported
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:9:13-37
+	android:theme
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:10:13-60
+	android:name
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:8:13-46
+uses-sdk
+INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml
+INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml

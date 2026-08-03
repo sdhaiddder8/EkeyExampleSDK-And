@@ -1,0 +1,9 @@
+com.example.ekeysdk-pngs-0 /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/build/generated/res/pngs/release
+com.example.ekeysdk-updated_navigation_xml-1 /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/build/generated/updated_navigation_xml/release
+com.example.ekeysdk-mergeReleaseResources-2 /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/build/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.example.ekeysdk-mergeReleaseResources-3 /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/build/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.example.ekeysdk-release-4 /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/build/intermediates/merged_res/release/mergeReleaseResources
+com.example.ekeysdk-release-5 /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/build/intermediates/packaged_res/release/packageReleaseResources
+com.example.ekeysdk-main-6 /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/res
+com.example.ekeysdk-release-7 /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/release/res
+gradleHome-0 /Users/syeddanish/.gradle

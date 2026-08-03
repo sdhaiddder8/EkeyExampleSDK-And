@@ -2,7 +2,6 @@ package com.example.ekeyexamplesdk
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -20,22 +19,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ekeysdk.Ekey
+import com.example.ekeysdk.EkeyLoginResult
 import com.example.ekeyexamplesdk.ui.theme.EkeyExampleSDKTheme
-
-private const val TAG = "Ekey"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,17 +49,13 @@ class MainActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        val data = intent.data
-        if (data != null && data.scheme == EkeyLoginConfig.CUSTOM_URL_SCHEME) {
-            Log.d(TAG, "focus_uri received: $data")
-            EkeyLoginEvents.notifyResume()
-        }
+        Ekey.handleIntent(intent)
     }
 }
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
-    var showingEkeyLogin by remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     Column(
         modifier = modifier
@@ -86,8 +78,15 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         )
         Button(
             onClick = {
-                Log.d(TAG, "Initiate Ekey Flow tapped")
-                showingEkeyLogin = true
+                val activity = context as? ComponentActivity ?: return@Button
+                Ekey.initiateLogin(activity) { result ->
+                    when (result) {
+                        is EkeyLoginResult.Completed ->
+                            println("Ekey login completed: ${result.redirectUri}")
+                        EkeyLoginResult.Cancelled ->
+                            println("Ekey login cancelled")
+                    }
+                }
             },
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
             contentPadding = PaddingValues(),
@@ -107,16 +106,6 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier.padding(vertical = 14.dp)
             )
         }
-    }
-
-    if (showingEkeyLogin) {
-        EkeyLoginScreen(
-            onDismiss = { showingEkeyLogin = false },
-            onCompleted = { uri ->
-                Log.d(TAG, "Ekey login completed: $uri")
-                showingEkeyLogin = false
-            }
-        )
     }
 }
 

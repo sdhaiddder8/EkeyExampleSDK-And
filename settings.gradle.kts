@@ -24,3 +24,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "EkeyExampleSDK"
 include(":app")
+include(":ekeysdk")
