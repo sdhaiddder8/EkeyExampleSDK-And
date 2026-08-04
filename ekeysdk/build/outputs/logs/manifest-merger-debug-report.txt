@@ -1,7 +1,7 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:2:1-13:12
-INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:2:1-13:12
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:2:1-31:12
 	package
 		INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml
 	xmlns:android
@@ -11,15 +11,37 @@ ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/ma
 	android:name
 		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:4:22-64
 application
-ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:6:5-11:19
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:6:5-29:19
 activity#com.example.ekeysdk.EkeyLoginActivity
-ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:7:9-10:63
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:7:9-28:20
+	android:launchMode
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:10:13-43
 	android:exported
-		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:9:13-37
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:9:13-36
 	android:theme
-		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:10:13-60
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:11:13-60
 	android:name
 		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:8:13-46
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:callback+data:scheme:necekey
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:20:13-27:29
+action#android.intent.action.VIEW
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:21:17-69
+	android:name
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:21:25-66
+category#android.intent.category.DEFAULT
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:23:17-76
+	android:name
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:23:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:24:17-78
+	android:name
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:24:27-75
+data
+ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:26:17-74
+	android:host
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:26:48-71
+	android:scheme
+		ADDED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml:26:23-47
 uses-sdk
 INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/syeddanish/AndroidStudioProjects/EkeyExampleSDK/ekeysdk/src/main/AndroidManifest.xml

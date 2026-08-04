@@ -1,6 +1,5 @@
 package com.example.ekeyexamplesdk
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -45,12 +44,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        setIntent(intent)
-        Ekey.handleIntent(intent)
-    }
 }
 
 @Composable
@@ -84,7 +77,9 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                         is EkeyLoginResult.Completed ->
                             println("Ekey login completed: ${result.redirectUri}")
                         EkeyLoginResult.Cancelled ->
-                            println("Ekey login cancelled")
+                            println("Ekey login danish cancelled")
+                        is EkeyLoginResult.Failed ->
+                            println("Ekey login failed: ${result.error}")
                     }
                 }
             },

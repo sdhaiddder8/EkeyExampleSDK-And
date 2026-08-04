@@ -6,12 +6,15 @@ import android.net.Uri
 import android.os.Message
 import android.view.ViewGroup
 import android.webkit.WebChromeClient
-import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 
-internal class EkeyWebViewController(context: Context, private val onCompleted: (Uri) -> Unit) {
+internal class EkeyWebViewController(
+    context: Context,
+    private val onCompleted: (Uri) -> Unit,
+    private val onFailed: (EkeyLoginError) -> Unit
+) {
     val webView: WebView = WebView(context).apply {
         layoutParams = ViewGroup.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -24,6 +27,7 @@ internal class EkeyWebViewController(context: Context, private val onCompleted: 
     }
 
     private var didOpenEkeyApp = false
+    private var expectedState: String? = null
 
     init {
         webView.webViewClient = object : WebViewClient() {
@@ -68,6 +72,7 @@ internal class EkeyWebViewController(context: Context, private val onCompleted: 
     fun start() {
         didOpenEkeyApp = false
         val request = EkeyLoginConfig.makeAuthorizationRequest()
+        expectedState = request.state
         webView.loadUrl(request.uri.toString())
     }
 
@@ -86,7 +91,11 @@ internal class EkeyWebViewController(context: Context, private val onCompleted: 
         val urlString = url.toString()
 
         if (urlString.startsWith(EkeyLoginConfig.REDIRECT_URI)) {
-            onCompleted(url)
+            if (stateMatches(url)) {
+                onCompleted(url)
+            } else {
+                onFailed(EkeyLoginError.StateMismatch)
+            }
             return true
         }
 
@@ -101,5 +110,14 @@ internal class EkeyWebViewController(context: Context, private val onCompleted: 
         }
 
         return false
+    }
+
+    /**
+     * Guards against CSRF/session-mixup: redirect_uri's `state` must match the one generated for
+     * this specific authorization request.
+     */
+    private fun stateMatches(url: Uri): Boolean {
+        val expected = expectedState ?: return false
+        return url.getQueryParameter("state") == expected
     }
 }

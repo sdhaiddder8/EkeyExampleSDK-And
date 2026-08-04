@@ -1,5 +1,6 @@
 package com.example.ekeysdk
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.addCallback
@@ -18,6 +19,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 
 internal class EkeyLoginActivity : ComponentActivity() {
+    private var controller: EkeyWebViewController? = null
+
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,21 +29,22 @@ internal class EkeyLoginActivity : ComponentActivity() {
         }
         setContent {
             val context = LocalContext.current
-            val controller = remember {
-                EkeyWebViewController(context) { uri ->
-                    Ekey.deliverResult(EkeyLoginResult.Completed(uri))
-                    finish()
-                }
+            val webController = remember {
+                EkeyWebViewController(
+                    context = context,
+                    onCompleted = { uri ->
+                        Ekey.deliverResult(EkeyLoginResult.Completed(uri))
+                        finish()
+                    },
+                    onFailed = { error ->
+                        Ekey.deliverResult(EkeyLoginResult.Failed(error))
+                        finish()
+                    }
+                ).also { controller = it }
             }
 
             LaunchedEffect(Unit) {
-                controller.start()
-            }
-
-            LaunchedEffect(Unit) {
-                EkeyLoginEvents.onResume.collect {
-                    controller.resume()
-                }
+                webController.start()
             }
 
             Scaffold(
@@ -56,12 +60,26 @@ internal class EkeyLoginActivity : ComponentActivity() {
                 }
             ) { innerPadding ->
                 AndroidView(
-                    factory = { controller.webView },
+                    factory = { webController.webView },
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(innerPadding)
                 )
             }
+        }
+    }
+
+    /**
+     * Called when eKey redirects back via `necekey://callback` (registered directly on this
+     * Activity — see AndroidManifest.xml for why). The WebView (and its session cookies) has
+     * been kept alive the whole time, so resuming it here lets the server-side OIDC interaction
+     * continue from consented-login through to redirect_uri.
+     */
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        if (intent.data?.scheme == EkeyLoginConfig.CUSTOM_URL_SCHEME) {
+            controller?.resume()
         }
     }
 

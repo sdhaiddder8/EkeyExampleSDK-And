@@ -9,8 +9,30 @@
     <application>
         <activity
             android:name="com.example.ekeysdk.EkeyLoginActivity"
-            android:exported="false"
-            android:theme="@android:style/Theme.NoTitleBar" />
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar" >
+
+            <!--
+                 focus_uri callback for eKey 2.0 app-to-app login: necekey://callback.
+                 This must live on EkeyLoginActivity, not the host app's activity: at the
+                 moment eKey redirects back, EkeyLoginActivity is the top of our task's back
+                 stack (the external eKey app/browser runs in its own task), so singleTop
+                 correctly reuses this instance via onNewIntent. Registering it on a
+                 non-top activity instead causes Android to spawn a brand-new instance via
+                 onCreate rather than routing to onNewIntent, silently dropping the callback.
+            -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="callback"
+                    android:scheme="necekey" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
