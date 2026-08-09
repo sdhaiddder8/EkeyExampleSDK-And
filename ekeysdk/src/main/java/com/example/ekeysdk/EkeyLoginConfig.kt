@@ -17,9 +17,9 @@ internal data class EkeyAuthorizationRequest(
  * from the app side.
  */
 internal object EkeyLoginConfig {
-    const val AUTHORIZATION_BASE_URL = "https://login.test.ekey-b.com/oidc/auth"
-    const val CLIENT_ID = "iZ4lBvruWxmSYqSWw-Wcf"
-    const val REDIRECT_URI = "https://mobileapp.uat.necremit.com/RedirectURIC/WS_MobileAPICALLS.asmx"
+    const val AUTHORIZATION_BASE_URL = "https://login.ekey.bh/oidc/auth"
+    const val CLIENT_ID = "ugiTHWoHreu2j8nACiBQV"
+    const val REDIRECT_URI = "https://mobileapp.necremit.com/beyon/WS_MobileAPICALLS.asmx"
     const val SCOPE = "openid id-* id-*-additional id-*-photo ekyc-bhr-name ekyc-bhr-address " +
         "ekyc-bhr-birth ekyc-bhr-nationality ekyc-bhr-contact ekyc-bhr-employment " +
         "ekyc-bhr-passport ekyc-bhr-resident ekyc-bhr-photo ekyc-bhr-disability " +
@@ -27,10 +27,8 @@ internal object EkeyLoginConfig {
     const val CUSTOM_URL_SCHEME = "necekey"
     const val FOCUS_URI = "$CUSTOM_URL_SCHEME://callback"
 
-    // Per the integration guide's Environments section: production's App-to-App launch
-    // domain is app.ekey.bh, while the test/UAT environment (used here) hands the
-    // mobileLogin URL back on tools.test.ekey-b.com instead.
-    val EKEY_APP_TO_APP_DOMAINS = listOf("app.ekey.bh", "tools.test.ekey-b.com")
+    // Production's App-to-App launch domain.
+    val EKEY_APP_TO_APP_DOMAINS = listOf("app.ekey.bh")
 
     fun makeAuthorizationRequest(): EkeyAuthorizationRequest {
         val codeVerifier = randomUrlSafeString(32)
