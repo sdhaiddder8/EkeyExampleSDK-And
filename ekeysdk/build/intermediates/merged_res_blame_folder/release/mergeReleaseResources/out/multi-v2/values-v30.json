@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.ekeysdk-release-35:/values-v30/values-v30.xml",
+            "outputFile": "com.example.ekeysdk-mergeReleaseResources-37:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "/Users/syeddanish/.gradle/caches/9.5.0/transforms/9b7af34d9baab5a8a47578ec5ed85bfd/transformed/material3/res/values-v30/values-v30.xml",
+                    "source": "/Users/syeddanish/.gradle/caches/9.5.0/transforms/90a5c8af88d3ec6c954a86f23a6d5675/transformed/material3-release/res/values-v30/values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -16,10 +16,10 @@
             ]
         },
         {
-            "outputFile": "com.example.ekeysdk-mergeReleaseResources-33:/values-v30/values-v30.xml",
+            "outputFile": "com.example.ekeysdk-release-39:/values-v30/values-v30.xml",
             "map": [
                 {
-                    "source": "/Users/syeddanish/.gradle/caches/9.5.0/transforms/9b7af34d9baab5a8a47578ec5ed85bfd/transformed/material3/res/values-v30/values-v30.xml",
+                    "source": "/Users/syeddanish/.gradle/caches/9.5.0/transforms/90a5c8af88d3ec6c954a86f23a6d5675/transformed/material3-release/res/values-v30/values-v30.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
