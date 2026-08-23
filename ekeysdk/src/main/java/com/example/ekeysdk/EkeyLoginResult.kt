@@ -5,12 +5,14 @@ import android.net.Uri
 sealed class EkeyLoginResult {
     /**
      * The WebView reached the configured redirect_uri and its `state` matched the one this SDK
-     * generated for the request. [redirectUri] carries the `code`/`state` query parameters —
-     * exchange them for tokens from your back-end (integration guide §2.2.5). This SDK never
-     * performs the token exchange itself, since that requires the client_secret, which must not
-     * ship inside a mobile app.
+     * generated for the request. [redirectUri] carries the `code`/`state` query parameters, and
+     * [codeVerifier] is the PKCE verifier generated for this same request — your back-end needs
+     * both to exchange the code for tokens (integration guide §2.2.5, which lists
+     * `code_verifier` as a required token-exchange parameter). This SDK never performs the
+     * token exchange itself, since that requires the client_secret, which must not ship inside
+     * a mobile app.
      */
-    data class Completed(val redirectUri: Uri) : EkeyLoginResult()
+    data class Completed(val redirectUri: Uri, val codeVerifier: String) : EkeyLoginResult()
 
     /** The user dismissed the login screen before completing the flow. */
     object Cancelled : EkeyLoginResult()

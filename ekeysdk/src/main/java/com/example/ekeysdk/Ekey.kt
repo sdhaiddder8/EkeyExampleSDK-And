@@ -14,7 +14,8 @@ import android.content.Intent
  * Ekey.initiateLogin(this) { result ->
  *     when (result) {
  *         is EkeyLoginResult.Completed -> {
- *             // Send result.redirectUri's `code` + `state` to your back-end for token exchange.
+ *             // Send result.redirectUri's `code` + `state`, and result.codeVerifier, to your
+ *             // back-end for token exchange.
  *         }
  *         EkeyLoginResult.Cancelled -> {}
  *         is EkeyLoginResult.Failed -> {

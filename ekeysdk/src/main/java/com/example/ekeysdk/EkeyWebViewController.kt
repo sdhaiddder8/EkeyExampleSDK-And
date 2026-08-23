@@ -12,7 +12,7 @@ import android.webkit.WebViewClient
 
 internal class EkeyWebViewController(
     context: Context,
-    private val onCompleted: (Uri) -> Unit,
+    private val onCompleted: (Uri, String) -> Unit,
     private val onFailed: (EkeyLoginError) -> Unit
 ) {
     val webView: WebView = WebView(context).apply {
@@ -28,6 +28,7 @@ internal class EkeyWebViewController(
 
     private var didOpenEkeyApp = false
     private var expectedState: String? = null
+    private var codeVerifier: String? = null
 
     init {
         webView.webViewClient = object : WebViewClient() {
@@ -73,6 +74,7 @@ internal class EkeyWebViewController(
         didOpenEkeyApp = false
         val request = EkeyLoginConfig.makeAuthorizationRequest()
         expectedState = request.state
+        codeVerifier = request.codeVerifier
         webView.loadUrl(request.uri.toString())
     }
 
@@ -91,8 +93,9 @@ internal class EkeyWebViewController(
         val urlString = url.toString()
 
         if (urlString.startsWith(EkeyLoginConfig.REDIRECT_URI)) {
-            if (stateMatches(url)) {
-                onCompleted(url)
+            val verifier = codeVerifier
+            if (stateMatches(url) && verifier != null) {
+                onCompleted(url, verifier)
             } else {
                 onFailed(EkeyLoginError.StateMismatch)
             }

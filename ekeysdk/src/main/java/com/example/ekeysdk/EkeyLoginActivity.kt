@@ -32,8 +32,8 @@ internal class EkeyLoginActivity : ComponentActivity() {
             val webController = remember {
                 EkeyWebViewController(
                     context = context,
-                    onCompleted = { uri ->
-                        Ekey.deliverResult(EkeyLoginResult.Completed(uri))
+                    onCompleted = { uri, codeVerifier ->
+                        Ekey.deliverResult(EkeyLoginResult.Completed(uri, codeVerifier))
                         finish()
                     },
                     onFailed = { error ->
