@@ -74,8 +74,11 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 val activity = context as? ComponentActivity ?: return@Button
                 Ekey.initiateLogin(activity) { result ->
                     when (result) {
-                        is EkeyLoginResult.Completed ->
-                            println("Ekey login completed: ${result.redirectUri}")
+                        is EkeyLoginResult.Completed -> {
+                            println("Ekey login completed: ${result.redirectUri}, codeVerifier: ${result.codeVerifier}")
+                            println("Identity claims: ${result.identity.claims}")
+                            println("KYC data: ${result.identity.kycData}")
+                        }
                         EkeyLoginResult.Cancelled ->
                             println("Ekey login danish cancelled")
                         is EkeyLoginResult.Failed ->

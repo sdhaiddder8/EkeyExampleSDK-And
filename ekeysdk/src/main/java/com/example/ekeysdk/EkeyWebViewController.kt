@@ -12,7 +12,7 @@ import android.webkit.WebViewClient
 
 internal class EkeyWebViewController(
     context: Context,
-    private val onCompleted: (Uri, String) -> Unit,
+    private val onCompleted: (Uri, String, EkeyIdentityData) -> Unit,
     private val onFailed: (EkeyLoginError) -> Unit
 ) {
     val webView: WebView = WebView(context).apply {
@@ -94,10 +94,17 @@ internal class EkeyWebViewController(
 
         if (urlString.startsWith(EkeyLoginConfig.REDIRECT_URI)) {
             val verifier = codeVerifier
-            if (stateMatches(url) && verifier != null) {
-                onCompleted(url, verifier)
-            } else {
+            val code = url.getQueryParameter("code")
+            if (!stateMatches(url) || verifier == null || code == null) {
                 onFailed(EkeyLoginError.StateMismatch)
+                return true
+            }
+
+            EkeyTokenExchange.exchangeAndFetchKyc(code = code, codeVerifier = verifier) { result ->
+                when (result) {
+                    is EkeyTokenExchangeResult.Success -> onCompleted(url, verifier, result.identity)
+                    is EkeyTokenExchangeResult.Failure -> onFailed(EkeyLoginError.TokenExchangeFailed(result.error))
+                }
             }
             return true
         }

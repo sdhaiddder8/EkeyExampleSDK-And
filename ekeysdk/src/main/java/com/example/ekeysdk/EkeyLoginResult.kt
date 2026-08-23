@@ -4,15 +4,19 @@ import android.net.Uri
 
 sealed class EkeyLoginResult {
     /**
-     * The WebView reached the configured redirect_uri and its `state` matched the one this SDK
-     * generated for the request. [redirectUri] carries the `code`/`state` query parameters, and
-     * [codeVerifier] is the PKCE verifier generated for this same request — your back-end needs
-     * both to exchange the code for tokens (integration guide §2.2.5, which lists
-     * `code_verifier` as a required token-exchange parameter). This SDK never performs the
-     * token exchange itself, since that requires the client_secret, which must not ship inside
-     * a mobile app.
+     * The WebView reached the configured redirect_uri, its `state` matched the one this SDK
+     * generated for the request, and the SDK successfully exchanged the code for tokens.
+     * [redirectUri] carries the `code`/`state` query parameters, [codeVerifier] is the PKCE
+     * verifier generated for this same request, and [identity] carries the decoded ID token
+     * claims plus KYC data (if granted) — the SDK performs the token exchange internally rather
+     * than requiring a back-end round trip. See EkeyTokenExchange.kt for the security trade-off
+     * this implies (client_secret ships inside the app binary).
      */
-    data class Completed(val redirectUri: Uri, val codeVerifier: String) : EkeyLoginResult()
+    data class Completed(
+        val redirectUri: Uri,
+        val codeVerifier: String,
+        val identity: EkeyIdentityData
+    ) : EkeyLoginResult()
 
     /** The user dismissed the login screen before completing the flow. */
     object Cancelled : EkeyLoginResult()
@@ -28,4 +32,7 @@ sealed class EkeyLoginError {
      * result is rejected rather than treated as a successful login.
      */
     object StateMismatch : EkeyLoginError()
+
+    /** The code-for-token exchange or KYC data fetch failed. See [EkeyTokenExchangeError]. */
+    data class TokenExchangeFailed(val error: EkeyTokenExchangeError) : EkeyLoginError()
 }

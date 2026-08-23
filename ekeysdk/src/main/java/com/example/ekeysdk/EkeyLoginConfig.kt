@@ -18,7 +18,14 @@ internal data class EkeyAuthorizationRequest(
  */
 internal object EkeyLoginConfig {
     const val AUTHORIZATION_BASE_URL = "https://login.ekey.bh/oidc/auth"
+    const val TOKEN_URL = "https://login.ekey.bh/oidc/token"
     const val CLIENT_ID = "ugiTHWoHreu2j8nACiBQV"
+    // Embedding this in the SDK means it ships inside the compiled app binary and can be
+    // extracted by anyone with the .apk/.aar (e.g. via `strings`/`javap`, same as this SDK's
+    // own client_id/config values are trivially readable today). This is a deliberate,
+    // explicitly-requested trade-off, not an oversight — see EkeyTokenExchange.kt for what
+    // it's used for. Matches the iOS SDK's EkeyLoginConfig.swift.
+    const val CLIENT_SECRET = "xbYcRWjAuWpWuyc1N7hhrXycGolrgA1xFbAykNuMkUyCjWQdEHWd0OMTucYUZjKvqnf9upvdzksB-fZf8mFoBw"
     const val REDIRECT_URI = "https://mobileapp.necremit.com/beyon/WS_MobileAPICALLS.asmx"
     const val SCOPE = "openid id-* id-*-additional id-*-photo ekyc-bhr-name ekyc-bhr-address " +
         "ekyc-bhr-birth ekyc-bhr-nationality ekyc-bhr-contact ekyc-bhr-employment " +
